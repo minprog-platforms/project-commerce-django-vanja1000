@@ -27,8 +27,8 @@ Design an eBay-like e-commerce auction site that will allow users to post auctio
 
 ## Getting Started
 `pip install django`
-## First makemigrations and migrate to create database for the Django server
+`# First makemigrations and migrate to create database for the Django server`
 `python3 manage.py makemigrations`
 `python manage.py migrate`
-## run server
+`# run server`
 `python manage.py runserver`
