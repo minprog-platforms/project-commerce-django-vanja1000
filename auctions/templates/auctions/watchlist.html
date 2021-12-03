@@ -1,0 +1,12 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<h1>Watchlist</h1>
+{% for listing in listings %}
+    <h3>{{ listing.title }}</h3>
+    <img src="{{ listing.image }}" class="card-img-top">
+    <p>Description: {{ listing.description }}</p>
+    <p>Starting Bid: €{{ listing.starting_bid }}</p>
+    <p>Category: {{ listing.category }}</p>      
+{% endfor %}   
+{% endblock %}

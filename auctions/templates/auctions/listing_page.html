@@ -1,0 +1,72 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<h1>Listing:</h1>
+    <h3>{{ listing.title }}</h3>
+    <img src="{{ listing.image }}" class="card-img-top">
+    <p>Description: {{ listing.description }}</p>
+    <p>Starting Bid: €{{ listing.starting_bid }}</p>
+    <p>Category: {{ listing.category }}</p>
+    <p>current bid: {{ listing.current_bid }}</p>
+
+
+
+    {% if user.is_authenticated %}
+        {% if in_watchlist == True %}
+            <a href="{% url 'remove_watchlist' listing.id %}">Remove from your Watchlist</a>
+        {% else %}
+            <a href="{% url 'add_watchlist' listing.id %}">Add to your Watchlist</a>
+
+        {% endif %}
+    {% else %}
+        <p>Sign in to add to watchlist!</p>
+    {% endif %}
+
+    {% if user.is_authenticated and listing.active == True %}
+        <p>Place your bid</p>
+        <form action="{% url 'offer' listing.id %}" method="POST">
+            {% csrf_token %}
+            <input type="number" name="user_offer" placeholder="Your offer">
+            <input type="submit" value="place">
+        </form>
+    {% elif listing.active == False %}
+        <p>Listing is closed!!</p>
+    {% else %}
+        <p>Sign in if you want to bid</p>
+    {% endif %}
+
+
+    {% if user.is_authenticated %}
+        {% if owner == True and listing.active == True %}
+        <a href="{% url 'close' listing.id %}">close bid</a>
+        {% endif %}
+    {% endif %}
+
+
+{% if listing.customer is not None and listing.active == False %}
+    {% if owner == True %}
+        <p>You've sold item this to {{ listing.customer }}</p>
+    {% elif customer == True %}
+        <p>you won this auction</p>
+    {% else %}
+        <p>item out of stock</p>
+    {% endif %}
+{% endif %}
+
+<h1>comments:</h1>
+{% if user.is_authenticated and listing.active == True %}
+    <form action="{% url 'comments' listing.id %}" method="POST">
+        {% csrf_token %}
+        <input type="text" name="your_comment" placeholder="Place comment...">
+        <input type="submit" value="place">
+    </form>
+{% else %}
+    <p>Sign in if you want to comment</p>
+{% endif %}
+
+
+{% for comment in listing.comment1.all %}
+    <p> {{ comment.user }}: {{ comment.comment }}  </p>
+{% endfor %}
+
+{% endblock %}

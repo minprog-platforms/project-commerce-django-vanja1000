@@ -3,5 +3,22 @@
 {% block body %}
     <h2>Active Listings</h2>
 
-    TODO
+    {% for listing in listings %}
+    <div class="row">
+        <div class="container border p-2 m-2">
+            <div class="card">
+                <img src="{{ listing.image }}" class="card-img-top">
+            </div>
+            <div class="column">
+                <h3>{{ listing.title }}
+            </h3>
+                <p>{{ listing.description }}</p>
+                <p>starting bid: €{{ listing.starting_bid }}</p>
+                <p>{{ listing.category }}</p>
+                <a href="{% url 'listing_page' listing.id %}">View Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+        
 {% endblock %}
