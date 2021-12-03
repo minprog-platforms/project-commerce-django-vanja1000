@@ -37,3 +37,8 @@ Design an eBay-like e-commerce auction site that will allow users to post auctio
 `# run server`
 
 `python manage.py runserver`
+
+![pic1](https://user-images.githubusercontent.com/90252333/144659171-b05cb63a-0f0b-48e9-b1b0-f1d4b94e67da.jpg)
+
+
+![pic2](https://user-images.githubusercontent.com/90252333/144659194-5cdd37e6-5d9a-4ebc-8643-99f939a8503a.jpg)
